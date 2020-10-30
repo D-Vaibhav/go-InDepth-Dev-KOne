@@ -15,7 +15,11 @@ func HomePageHandler(rw http.ResponseWriter, r *http.Request) {
 func GetBodyHandler(rw http.ResponseWriter, r *http.Request) {
 	log.Println("Requested for getBody page")
 
-	requestBodyData, _ := ioutil.ReadAll(r.Body)
+	requestBodyData, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		http.Error(rw, "Oops, its an bad Request", http.StatusBadRequest)
+		return
+	}
 	// log.Fatalf("Failed to load: %v", err)
 	fmt.Fprintf(rw, "this is getBody page with passed data: %s", requestBodyData)
 }
