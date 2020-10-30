@@ -7,5 +7,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", handlers.HomePageHandler)
+	http.HandleFunc("/getBody", handlers.GetBodyHandler)
+
 	http.ListenAndServe(":8000", nil)
 }
